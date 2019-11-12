@@ -1,0 +1,8 @@
+cluster_name = "p001"
+image = "Ubuntu_18.04"
+image_id = "8332510e-9636-473f-a72e-ba78e5be644f"
+control_plane_flavor = "c1.2"
+worker_flavor = "c1.3"
+lb_flavor = "c1.1"
+subnet_cidr = "192.168.10.0/24"
+external_network_name = "floating-net"
