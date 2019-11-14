@@ -22,9 +22,25 @@ provider "openstack" {
   domain_name = "default"
 }
 
+provider "local" {
+}
+
 data "openstack_networking_network_v2" "external_network" {
   name     = var.external_network_name
   external = true
+}
+
+# https://www.terraform.io/docs/providers/local/r/file.html
+resource "local_file" "key" {
+    content     = "${tls_private_key.ssh-key.private_key_pem}"
+    filename = "${var.cluster_name}-deployer-key.pem"
+    file_permission = "0444"
+}
+
+resource "local_file" "pub" {
+    content     = "${tls_private_key.ssh-key.public_key_openssh}"
+    filename = "${var.cluster_name}-deployer-pub.pem"
+    file_permission = "0444"
 }
 
 # https://www.terraform.io/docs/providers/tls/index.html
