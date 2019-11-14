@@ -27,9 +27,15 @@ data "openstack_networking_network_v2" "external_network" {
   external = true
 }
 
+# https://www.terraform.io/docs/providers/tls/index.html
+resource "tls_private_key" "ssh-key" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
 resource "openstack_compute_keypair_v2" "deployer" {
   name       = "${var.cluster_name}-deployer-key"
-  public_key = file(var.ssh_public_key_file)
+  public_key = "${tls_private_key.ssh-key.public_key_openssh}"
 }
 
 resource "openstack_networking_network_v2" "network" {

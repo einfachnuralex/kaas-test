@@ -31,9 +31,8 @@ output "kubeone_hosts" {
       cloud_provider       = "openstack"
       private_address      = openstack_compute_instance_v2.control_plane.access_ip_v4
       public_address       = openstack_networking_floatingip_v2.control_plane.address
-      ssh_agent_socket     = var.ssh_agent_socket
       ssh_port             = var.ssh_port
-      ssh_private_key_file = var.ssh_private_key_file
+      ssh_private_key_file = tls_private_key.ssh-key.public_key_openssh
       ssh_user             = var.ssh_username
     }
   }
@@ -48,7 +47,7 @@ output "kubeone_workers" {
     "${var.cluster_name}-pool1" = {
       replicas = 1
       providerSpec = {
-        sshPublicKeys   = [file(var.ssh_public_key_file)]
+        sshPublicKeys   = [tls_private_key.ssh-key.public_key_openssh]
         operatingSystem = var.worker_os
         operatingSystemSpec = {
           distUpgradeOnBoot = false

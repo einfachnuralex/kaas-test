@@ -28,11 +28,6 @@ variable "worker_os" {
   default = "ubuntu"
 }
 
-variable "ssh_public_key_file" {
-  description = "SSH public key file"
-  default     = "~/.ssh/id_rsa.pub"
-}
-
 variable "ssh_port" {
   description = "SSH port to be used to provision instances"
   default     = 22
@@ -41,16 +36,6 @@ variable "ssh_port" {
 variable "ssh_username" {
   description = "SSH user, used only in output"
   default     = "ubuntu"
-}
-
-variable "ssh_private_key_file" {
-  description = "SSH private key file used to access instances"
-  default     = ""
-}
-
-variable "ssh_agent_socket" {
-  description = "SSH Agent socket, default to grab from $SSH_AUTH_SOCK"
-  default     = "env:SSH_AUTH_SOCK"
 }
 
 # Provider specific settings
