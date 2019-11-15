@@ -16,6 +16,7 @@ limitations under the License.
 
 variable "cluster_name" {
   description = "Name of the cluster"
+  default = "env:CLUSTERNAME"
 }
 
 variable "worker_os" {
@@ -41,12 +42,12 @@ variable "ssh_username" {
 # Provider specific settings
 
 variable "control_plane_flavor" {
-  default     = "m1.small"
+  default     = "env:CONTROL_PLANE_FLAVOR"
   description = "OpenStack instance flavor for the control plane nodes"
 }
 
 variable "worker_flavor" {
-  default     = "m1.small"
+  default     = "env:WORKER_FLAVOR"
   description = "OpenStack instance flavor for the worker nodes"
 }
 
@@ -56,22 +57,23 @@ variable "lb_flavor" {
 }
 
 variable "image" {
-  default     = "Ubuntu 18.04"
+  default     = "env:IMAGE"
   description = "image name to use"
 }
 
 variable "image_id" {
-  default     = "8332510e-9636-473f-a72e-ba78e5be644f"
+  default     = "env:IMAGE_ID"
   description = "image name to use"
 }
 
 variable "subnet_cidr" {
-  default     = "192.168.1.0/24"
+  default     = "env:SUBNET_CIDR"
   description = "OpenStack subnet cidr"
 }
 
 variable "external_network_name" {
   description = "OpenStack external network name"
+  default = "env:EXTERNAL_NET_NAME"
 }
 
 variable "subnet_dns_servers" {

@@ -15,18 +15,13 @@ limitations under the License.
 */
 
 provider "openstack" {
-  auth_url    = "https://platform.cloud.schwarz:5000/v3"
-  region      = "RegionOne"
-  tenant_name = "openshift"
-  tenant_id   = "8daeed38df5047ecbf3319ea7c599c54"
-  domain_name = "default"
 }
 
 provider "local" {
 }
 
 data "openstack_networking_network_v2" "external_network" {
-  name     = var.external_network_name
+  name     = "var.external_network_name"
   external = true
 }
 
