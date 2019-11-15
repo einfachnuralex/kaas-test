@@ -29,10 +29,10 @@ output "kubeone_hosts" {
     control_plane = {
       cluster_name         = var.cluster_name
       cloud_provider       = "openstack"
-      private_address      = openstack_compute_instance_v2.control_plane.access_ip_v4
-      public_address       = openstack_networking_floatingip_v2.control_plane.address
+      private_address      = [openstack_compute_instance_v2.control_plane.access_ip_v4]
+      public_address       = [openstack_networking_floatingip_v2.control_plane.address]
       ssh_port             = var.ssh_port
-      ssh_private_key_file = tls_private_key.ssh-key.private_key_pem
+      ssh_private_key_file = "${var.cluster_name}-deployer-key.pem"
       ssh_user             = var.ssh_username
     }
   }
