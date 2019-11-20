@@ -123,6 +123,15 @@ resource "openstack_compute_instance_v2" "control_plane" {
     boot_index            = 0
     delete_on_termination = true
   }
+  connection {
+    type = "ssh"
+    host = openstack_networking_floatingip_v2.control_plane.address
+    user = var.ssh_username
+    private_key = tls_private_key.ssh-key.private_key_pem
+  }
+  provisioner "remote-exec" {
+    inline = ["# Connected!"]
+  }
 
   network {
     port = openstack_networking_port_v2.control_plane.id
