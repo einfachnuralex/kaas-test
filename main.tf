@@ -113,7 +113,7 @@ resource "openstack_compute_instance_v2" "control_plane" {
   image_name      = var.image
   flavor_name     = var.control_plane_flavor
   key_pair        = openstack_compute_keypair_v2.deployer.name
-  security_groups = [openstack_networking_secgroup_v2.securitygroup.name]
+  security_groups = [openstack_networking_secgroup_v2.securitygroup.id]
 
   block_device {
     uuid                  = var.image_id
